@@ -1,0 +1,104 @@
+*, *::after, *::before { box-sizing: border-box; }
+
+body {
+    font-family: "Avenir Next", Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.35;
+    background-color: #002630;
+    color: #889797;
+    padding: 5px 25px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+main, header, .menu { transition: all .2s ease-in; backface-visibility: hidden; transform: translateZ(0); }
+
+header { width: 100%; padding-top: 20px; }
+
+h1 { font-size: 18px; margin-bottom: 30px; margin-top: 0; display: inline-block; }
+h2 { font-size: 16px; margin-bottom: 15px; }
+h3 { font-size: 14px; }
+nav ul { list-style: none; margin: 0; padding: 0; }
+
+small { font-size: 70%; }
+.fr { float: right; }
+
+main { width: 100%; }
+
+.menu {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 400px;
+    transform: translateX(-100%) translateZ(0);
+    overflow: auto;
+    padding: 40px 20px;
+    background-color: white;
+    font-size: 14px;
+    white-space: nowrap;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.menu > ul > li:not(:first-child) { margin-top: 40px; }
+.menu > ul > li > ul { margin-left: 25px; margin-top: 10px; }
+.menu > ul > li > ul > li:not(:first-child) { margin-top: 2px; }
+.menu a { color: #222; text-decoration: none; }
+
+.menu-label { background-color: #fff; padding: 9px 14px; }
+
+.menu-trigger {
+    z-index: 3;
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    background-color: transparent;
+    transition: all .2s ease-in;
+    -webkit-appearance: none;
+}
+
+.menu-trigger::after {
+    content: '✕';
+    position: absolute;
+    font-size: 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #222;
+}
+
+.menu-trigger:checked {
+    opacity: 1;
+    visibility: visible;
+}
+
+.menu-trigger:checked ~ .menu {
+    transform: translateX(0) translateZ(0);
+}
+
+.menu-trigger:checked ~ main,
+.menu-trigger:checked ~ header {
+    width: calc(100% - 400px);
+    transform: translateX(400px) translateZ(0);
+}
+
+.handorgel { margin-bottom: 60px; }
+.handorgel__header--opened { position: sticky; top: 0; }
+
+pre {
+    font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", 
+        "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", 
+        "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    tab-size: 4;
+    max-height: 500px;
+    overflow: auto;
+    font-size: 13px;
+    background-color: #002630;
+    color: #889797;
+}
