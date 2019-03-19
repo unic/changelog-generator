@@ -20,7 +20,8 @@ const previewFolder = argv['preview-folder'] ? argv['preview-folder'] : false;
 const previewOnlineUrl = argv['preview-url'] ? argv['preview-url'].replace(/\/$/, '') : false;
 const previewGenerate = argv['preview-generate'] ? argv['preview-generate'] === 'true' : true;
 
-const ignoreFiles = argv['ignore-files'] ? argv['ignore-files']: '(.js|.css|index.html)$';
+const ignoreFiles = argv['ignore-files'] ? argv['ignore-files'] : '(.js|.css|index.html)$';
+const excludeLines = argv['exclude-lines'] ? argv['exclude-lines'] : '';
 const cols = argv['cols'] ? argv['cols'] : '220';
 const numlinesContext = argv['context'] ? argv['context'] : '7';
 
@@ -120,7 +121,7 @@ const diff = async function() {
             `--cols=${cols}`,
             `--recursive`,
             `--numlines=${numlinesContext}`,
-            `--line-numbers`,
+            `--exclude-lines=${excludeLines}`,
             oldPreviewPath,
             newPreviewPath
         ]);

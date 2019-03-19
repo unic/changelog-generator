@@ -36,49 +36,53 @@
 
         <main>
             {% for folder, folderData in folders %}
-                <h2 id="{{ folder }}">{{ folder }}</h2>
+                {% if folderData.missingOrNew|length > 0 or folderData.sites|length > 0 %}
+                    <h2 id="{{ folder }}">{{ folder }}</h2>
 
-                <div class="handorgel">
-                    {% if folderData.missingOrNew.length > 0 %}
-                        <h3 class="handorgel__header">
-                            <button class="handorgel__header__button" id="{{ folder }}-missing-or-new">
-                                <b>New or removed files</b>
-                            </button>
-                        </h3>
-                        <div class="handorgel__content">
-                            <div class="handorgel__content__inner">
-                                {% if previewOnlineUrl %}
-                                    <a href="{{ previewOnlineUrl }}/{{ folder }}" target="_blank">&raquo; Online Preview</a>
-                                {% endif %}
+                    <div class="handorgel">
+                        {% if folderData.missingOrNew|length > 0 %}
+                            <h3 class="handorgel__header">
+                                <button class="handorgel__header__button" id="{{ folder }}-missing-or-new">
+                                    <b>New or removed files</b>
+                                </button>
+                            </h3>
+                            <div class="handorgel__content">
+                                <div class="handorgel__content__inner">
+                                    {% if previewOnlineUrl %}
+                                        <a href="{{ previewOnlineUrl }}/{{ folder }}" target="_blank">&raquo; Online Preview</a>
+                                    {% endif %}
 
-                                <ul>
-                                    {% for missingOrNew in folderData.missingOrNew %}
-                                        <li>{{ missingOrNew }}</li>
-                                    {% endfor %}
-                                </ul>
+                                    <ul>
+                                        {% for missingOrNew in folderData.missingOrNew %}
+                                            <li>{{ missingOrNew }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    {% endif %}
+                        {% endif %}
 
-                    {% for site, siteData in folderData.sites %}
-                        <h3 class="handorgel__header">
-                            <button class="handorgel__header__button" id="site-{{ loop.index }}">
-                                <i>{{ site }}</i>
-                            </button>
-                        </h3>
-                        <div class="handorgel__content">
-                            <div class="handorgel__content__inner">
-                                {% if previewOnlineUrl %}
-                                    <a href="{{ previewOnlineUrl }}/{{ site }}" target="_blank">&raquo; Online Preview</a>
-                                {% endif %}
+                        {% for site, siteData in folderData.sites %}
+                            {% if siteData.sections|length > 1 or (siteData.sections|length == 1 and siteData.sections[0].html != '') %}
+                                <h3 class="handorgel__header">
+                                    <button class="handorgel__header__button" id="site-{{ loop.index }}">
+                                        <i>{{ site }}</i>
+                                    </button>
+                                </h3>
+                                <div class="handorgel__content">
+                                    <div class="handorgel__content__inner">
+                                        {% if previewOnlineUrl %}
+                                            <a href="{{ previewOnlineUrl }}/{{ site }}" target="_blank">&raquo; Online Preview</a>
+                                        {% endif %}
 
-                                {% for sectionIndex, sectionData in siteData.sections %}
-                                    <pre>{{ sectionData.html }}</pre>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                                        {% for sectionIndex, sectionData in siteData.sections %}
+                                            <pre>{{ sectionData.html }}</pre>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             {% endfor %}
         </main>
 

@@ -18,8 +18,9 @@ Works by passing a repository url, preview generation command, preview folder an
 
 Optionally you can use following options:
 
-* `--ignore-files`: Pass a regular expression to completly ignore changes from matching files (default `"(.js|.css|index.html)$"`):
-* `--cols`: Set the number of characters per line (default `220`):
-* `--context`: Set the number of lines to display before and after a comparison (default is `7`):
-* `--preview-url`: Pass a url to generate links to an online preview:
+* `--ignore-files`: Pass a regular expression to completly ignore changes from matching files (default `"(.js|.css|index.html)$"`)
+* `--exclude-lines`: Pass regex to check for lines that should be ignored (default `''`)
+* `--cols`: Set the number of characters per line (default `220`)
+* `--context`: Set the number of lines to display before and after a comparison (default is `7`)
+* `--preview-url`: Pass a url to generate links to an online preview
 * `--preview-generate=false`: Prevent cloning the repository, checking out the tags and generating the previews (useful when if already done)
