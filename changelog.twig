@@ -19,17 +19,22 @@
         <nav class="menu">
             <ul>
                 {% for folder, folderData in folders %}
-                    <li>
-                        <a href="#{{ folder }}"><b>{{ folder }}</b></a>
-                        <ul>
-                            {% if folderData.missingOrNew.length > 0 %}
-                                <li><a href="#{{ folder }}-missing-or-new">New or removed files</a></li>
-                            {% endif %}
-                            {% for site, siteData in folderData.sites %}
-                                <li><a href="#site-{{ loop.index }}">{{ site }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </li>
+                    {% if folderData.missingOrNew|length > 0 or folderData.sites|length > 0 %}
+                        <li>
+                            <a href="#{{ folder }}"><b>{{ folder }}</b></a>
+                            <ul>
+                                {% if folderData.missingOrNew|length > 0 %}
+                                    <li><a href="#{{ folder }}-missing-or-new">New or removed files</a></li>
+                                {% endif %}
+
+                                {% for site, siteData in folderData.sites %}
+                                    {% if siteData.sections|length > 1 or (siteData.sections|length == 1 and siteData.sections[0].html != '') %}
+                                        <li><a href="#site-{{ loop.index }}">{{ site }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </nav>
