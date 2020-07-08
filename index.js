@@ -109,7 +109,7 @@ const diff = async function() {
         const newPreviewPath = path.join(repoPath, newTag, previewFolder);
 
         const folders = {};
-        
+
         const convert = new AnsiToHtmlConverter({
             fg: '#889797',
             bg: '#002630',
@@ -196,7 +196,7 @@ const diff = async function() {
             } else {
                 if (!currentFileIgnore) {
                     currentSectionData += string;
-                }  
+                }
             }
         });
 
